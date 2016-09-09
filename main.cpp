@@ -1,7 +1,6 @@
 #include <iostream>
-#include <GLFW/glfw3.h>
-//#include "glfw/deps/glad/glad.h"
-#include <libltdl/lt_system.h>
+#include "glad/glad.h"
+#include "glfw3.h"
 
 void error_callback(int error, const char* description) {
     fprintf(stderr, "Error: %s\n", description);
@@ -34,10 +33,12 @@ int main() {
     glfwSetKeyCallback(window, key_callback);
 
     glfwMakeContextCurrent(window);
+    gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
     glfwSwapInterval(1);
 
     while (!glfwWindowShouldClose(window)) {
-//        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT);
         glfwSwapBuffers(window);
         glfwPollEvents();
     }

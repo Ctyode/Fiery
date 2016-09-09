@@ -3,10 +3,8 @@ project(Fiery)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp glad/src/glad.c)
 add_executable(Fiery ${SOURCE_FILES})
 
-add_subdirectory(glfw)
-include_directories(/glfw/include)
-target_link_libraries(Fiery glfw ${GLFW_LIBRARIES})
-target_link_libraries(Fiery glfw ${OPENGL_glu_LIBRARY} ${GLFW_LIBRARIES})
+include_directories(glad/include)
+target_link_libraries(Fiery ${CMAKE_SOURCE_DIR}/libglfw3.a dl X11 Xrandr pthread Xcursor Xxf86vm Xinerama ${OPENGL_LIBRARIES})
