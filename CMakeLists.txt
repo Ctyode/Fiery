@@ -3,8 +3,12 @@ project(Fiery)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp glad/src/glad.c)
+set(SOURCE_FILES main.c)
 add_executable(Fiery ${SOURCE_FILES})
 
-include_directories(glad/include)
-target_link_libraries(Fiery ${CMAKE_SOURCE_DIR}/libglfw3.a dl X11 Xrandr pthread Xcursor Xxf86vm Xinerama ${OPENGL_LIBRARIES})
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTK3 REQUIRED gtk+-3.0)
+include_directories(${GTK3_INCLUDE_DIRS})
+link_directories(${GTK3_LIBRARY_DIRS})
+add_definitions(${GTK3_CFLAGS_OTHER})
+target_link_libraries(Fiery ${GTK3_LIBRARIES} GL)
